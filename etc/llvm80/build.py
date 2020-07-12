@@ -17,16 +17,16 @@ def create_repo(in_dir, remote, commit):
         os.makedirs(in_dir)
     pushdir(in_dir)    
     os.system('git init')
-    os.system('git add origin %s' % remote)
+    os.system('git remote add origin %s' % remote)
     os.system('git fetch --depth=25000 origin master')
-    os.system('git reset --hard %s' % commit)
+    os.system('git reset --hard ' + commit)
     popdir()
 
 def clone_to(remote, cdir):
     os.system('git clone %s %s' % (remote, cdir))
 
-create_repo('llvm/tools/clang', 'https://github.com/llvm-mirror/clang.git', 'a6b9739069763243020f4ea6fe586bc135fde1f9')
 create_repo('llvm', 'https://github.com/llvm-mirror/llvm.git', '032b00a5404865765cda7db3039f39d54964d8b0')
+create_repo('llvm/tools/clang', 'https://github.com/llvm-mirror/clang.git', 'a6b9739069763243020f4ea6fe586bc135fde1f9')
 create_repo('libcxx', 'https://github.com/llvm-mirror/libcxx.git', 'a443a0013d336593743fa1d523f2ee428814beb1')
 
 clone_to('https://github.com/a2flo/SPIRV-Tools.git', '.')
